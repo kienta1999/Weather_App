@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Weather from './Weather'
 import axios from 'axios';
 
-function Query() {
+function Home() {
     const [query, setQuery] = useState(null);
     const [data, setData] = useState(null);
     let handleSubmit = (event) => { 
@@ -59,5 +59,5 @@ function Query() {
     }
   }
   
-  export default Query;
+  export default Home;
   

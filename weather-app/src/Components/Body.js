@@ -1,10 +1,10 @@
 import React from 'react';
-import Query from './Body/Query';
+import Home from './Body/Home/Home';
 
 function Body() {
     return (
       <div className="center">
-          <Query />
+          <Home />
       </div>
     );
   }
