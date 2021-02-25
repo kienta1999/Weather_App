@@ -2,4 +2,4 @@
 
 <p>This is the home page where you search for weather by giving the city as the query</p>
 
-<img src="image/Home.PNG" alt="">
+<img src="images/Home.PNG" alt="">
