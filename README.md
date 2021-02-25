@@ -12,7 +12,7 @@
 <img src="images/Home.PNG" alt="home">
 
 <p>And the information after submitting the form</p>
-<img src="images/Weather.PNG" alt="home">
+<img src="images/WeatherInfor.PNG" alt="home">
 
 <p>The generated bar chart about temperture</p>
 <img src="images/BarChart.PNG" alt="home">
