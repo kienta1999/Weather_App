@@ -49,6 +49,18 @@ app.get('/weather/:query', (req, res) => {
         })
 })
 
+app.get('/history', (req, res) => {
+    console.log(req.query);
+    let limit = Number(req.query.limit) || 10
+    let offset = Number(req.query.offset) || 0
+    db.query('SELECT * FROM history LIMIT ? OFFSET ?', [limit, offset], (err, his) => {
+        if(err) throw err;
+        res.json(his);
+    });
+});
+
+
+
 app.listen(port, () => {
 console.log(`Example app listening at http://localhost:${port}`)
 })
