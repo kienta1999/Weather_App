@@ -36,7 +36,6 @@ app.get('/weather/:query', (req, res) => {
     axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(query)}&appid=fc9331f99b901f7ad8d6c32816c49820&units=metric`)
         .then(data => {
             data = data.data
-            if(data == null) res.json(data);
             db.query("INSERT INTO history (`query`, `date`, `city_id`, `city_name`, `description`, `avg_temp`, `min_temp`, `max_temp`, `humidity`, `pressure`, `visibility`, `wind_speed`) VALUES (?,CURRENT_DATE,?,?,?,?,?,?,?,?,?,?)",
                     [query, data.id, data.name, data.weather[0].description, data.main.temp, data.main.temp_min, data.main.temp_max, data.main.humidity, data.main.pressure, data.visibility, data.wind.speed]
                     , (error, results) => {
@@ -46,6 +45,9 @@ app.get('/weather/:query', (req, res) => {
                         res.json(data)
                     }
             });
+        })
+        .catch(error => {
+            res.json(null); 
         })
 })
 
