@@ -60,7 +60,16 @@ app.get('/history', (req, res) => {
 });
 
 app.delete('/history/:id', (req, res) => {
-
+    id = req.params.id
+    console.log(id);
+    db.query('DELETE FROM history where id=?', [id], (err) => {
+        if(err){
+            res.json({success: false});
+        }
+        else{
+            res.json({success: true});
+        }
+    });
 });
 
 app.listen(port, () => {

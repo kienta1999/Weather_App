@@ -22,16 +22,30 @@ function History(){
         fetchData()
     }, [])
 
-    let nextPage = async (event) => {
+    let nextPage = (event) => {
         offset = limit * (page + 1)
         setPage(page + 1)
         fetchData()
     }
-    let prevPage = async (event) => {
+    let prevPage = (event) => {
         if(page == 0) return;
         offset = limit * (page - 1)
         setPage(page - 1)
         fetchData()
+    }
+
+    let handleDelete = (event) => {
+        event.preventDefault();
+        let id = event.target.id.value
+        console.log(id);
+        axios.delete(`http://localhost:3001/history/${id}`)
+        .then(res => {
+            if(res.data.success) {
+                setPage(page)
+                offset = limit * page
+                fetchData()
+            }
+        })
     }
         if(data){
             let history = data.map((entry) => {
@@ -44,7 +58,12 @@ function History(){
                             <sup>o</sup>C and max temperture {entry.max_temp} <sup>o</sup>C). Humidity: {entry.humidity}%, 
                             Pressure: {entry.pressure} pascal, Visibility: {Number(entry.visibility) / 1000} km, Wind speed: 
                             {entry.wind_speed} km/h</td>
-                        <td><button type="button" className="btn btn-danger">Delete</button></td>
+                        <td>
+                            <form action="/" method="get" onSubmit={handleDelete}>
+                                <input type="hidden" name="id" value={entry.id}/>
+                                <button type="submit" className="btn btn-danger">Delete</button>
+                            </form>    
+                        </td>
                     </tr>
                 )
             });
